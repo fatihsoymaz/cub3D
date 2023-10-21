@@ -7,8 +7,6 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-
-
 typedef struct s_map
 {
 	char	**map;
@@ -47,4 +45,6 @@ void		ft_get_map2(t_data *data);
 void		map_free(char **map);
 char		*ft_strjoin_v2(char *str, char buffer, int len);
 int			map_lines(char *str);
+void		del_wspace(char **str);
+void		free_func(t_data *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:34:44 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/21 12:09:03 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 12:57:31 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,25 +82,6 @@ void	ft_get_map(char *str, t_data *game)
 	game->map.map[i] = NULL;
 	close(fd);
 	text_nswe(game);
-}
-
-
-void	free_func(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	while (data->map.map2[++i])
-		free(data->map.map2[i]);
-	free(data->map.map);
-	free(data->map.map2);
-	free(data->map.ea);
-	free(data->map.so);
-	free(data->map.no);
-	free(data->map.we);
-	free(data->map.f);
-	free(data->map.c);
-	free(data);
 }
 
 int	main(int ac, char **av)

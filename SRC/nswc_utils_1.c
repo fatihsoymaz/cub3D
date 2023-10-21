@@ -6,30 +6,11 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 00:43:50 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/20 20:44:42 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 12:57:00 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	del_wspace(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while ((*str)[i])
-	{
-		if ((*str)[i] != ' ')
-		{
-			(*str)[j] = (*str)[i];
-			j++;
-		}
-		i++;
-	}
-	(*str)[j] = '\0';
-}
 
 int	count_comma(char *s)
 {
@@ -45,16 +26,12 @@ int	count_comma(char *s)
 	return (count);
 }
 
-int	count_wd(char *s)
+int	add_count(char *s)
 {
 	int	i;
 	int	count;
 
 	count = 0;
-	i = -1;
-	while (s[++i])
-		if (!ft_isdigit(s[i]) && s[i] != ',' && s[i] != '\n' && s[i] != ' ')
-			ft_err();
 	i = 0;
 	while (s[i])
 	{
@@ -67,39 +44,27 @@ int	count_wd(char *s)
 		while (s[i] && s[i] != ' ' && s[i] != ',')
 			i++;
 	}
+	return (count);
+}
+
+int	count_wd(char *s)
+{
+	int	i;
+	int	count;
+
+	count = add_count(s);
+	i = -1;
+	while (s[++i])
+		if (!ft_isdigit(s[i]) && s[i] != ',' && s[i] != '\n' && s[i] != ' ')
+			ft_err();
 	del_wspace(&s);
-	if (!ft_isdigit(*s))
-		ft_err();
 	while (*s)
 	{
-		if (*s == ',' && *(s + 1) == ',')
-			ft_err();
-		if (*s == ',' && (*(s + 1) == '\n'))
+		if (*s == ',' && ft_strchr(",\n", *(s + 1)))
 			ft_err();
 		s++;
 	}
 	return (count);
-}
-
-int	ft_sp_ctrl(char *str)
-{
-	int	i;
-	int	flag;
-
-	i = 0;
-	flag = 0;
-	while (str[i] && str[i] != '\n')
-	{
-		if (str[i] != 32)
-		{
-			flag = 1;
-			break ;
-		}
-		i++;
-	}
-	if (str[i] == '\n' && ft_strlen(str) == 1)
-		flag = 1;
-	return (flag);
 }
 
 void	control2(t_data *data, char *str)

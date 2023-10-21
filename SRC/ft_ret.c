@@ -6,7 +6,7 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:04:09 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/20 13:05:15 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 13:06:58 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,9 @@ char	*ft_ret(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == 32)
-			i++;
-		else if (str[i] == '.' && ft_wh_sp(str[i - 1]))
-			break ;
-		else
+		if (str[i] == '.' && str[i - 1] != 32 && str[i + 1] == '/')
 			ft_err();
+		i++;
 	}
 	ft_check(str);
 	a = ft_strtrim(str, " \n");

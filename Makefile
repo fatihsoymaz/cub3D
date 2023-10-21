@@ -1,5 +1,5 @@
 NAME = cub3D
-SRCS =  ./SRC/utils.c ./SRC/ft_ret.c ./SRC/map.c ./SRC/main.c ./SRC/sn_utils.c \
+SRCS =  ./SRC/utils.c ./SRC/utils2.c ./SRC/ft_ret.c ./SRC/map.c ./SRC/main.c ./SRC/sn_utils.c \
 	./SRC/nswc_utils_1.c ./SRC/map_control.c ./include/get_next_line/libftgnl.a ./include/libft/libft.a
 OBJS = $(SRCS:.c=.o)
 LIBFT = ./include/libft/libft.a

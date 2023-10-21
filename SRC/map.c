@@ -6,7 +6,7 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:39:47 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/21 12:18:46 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 12:41:22 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void	ctrl(t_data *data)
 	data->map.map_col = a;
 }
 
-void	try(char **str, int *k, t_data *data)
+void	empty_line(char **str, int *k, t_data *data)
 {
 	int	i;
 
@@ -187,21 +187,19 @@ void	ft_get_map2(t_data *data)
 	i = 0;
 	while (ft_strlen(data->map.map2[i]) == 1)
 		i++;
-	try(data->map.map2, &i, data);
+	empty_line(data->map.map2, &i, data);
 	k = i;
 	while (data->map.map2[i])
 	{
+		if (ft_sp_ctrl(data->map.map2[i]) == 0)
+			ft_err();
 		j = -1;
 		while (data->map.map2[i][++j])
 		{
 			if (!ft_strchr("01\n NSWE", data->map.map2[i][j]))
-			{
-				printf("errr\n");
 				ft_err();
-			}
 
-			if (data->map.map2[i][j] == 'N' || data->map.map2[i][j] == 'W'
-				|| data->map.map2[i][j] == 'E' || data->map.map2[i][j] == 'S')
+			if (ft_strchr("NWES", data->map.map2[i][j]))
 			{
 				data->map.type = data->map.map2[i][j];
 				data->map.count++;
