@@ -6,11 +6,11 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:04:09 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/21 13:06:58 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:39:04 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 char	**ft_ret_fc_next(char *str, char **split, int res, char c)
 {
@@ -63,33 +63,22 @@ void	ft_check(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
-	{
+	i = -1;
+	while (str[++i])
 		if (str[i] == 'm' && str[i - 1] == 'p' && str[i - 2] == 'x')
 			break ;
-		i++;
-	}
-	while (str[++i])
-	{
-		if (!ft_wh_sp(str[i]) && str[i] != '\n')
-			ft_err();
-	}
 }
 
 char	*ft_ret(char *str)
 {
 	int		i;
-	char	*a;
+	char	*ret;
 
-	i = 0;
-	while (str[i])
-	{
+	i = -1;
+	while (str[++i])
 		if (str[i] == '.' && str[i - 1] != 32 && str[i + 1] == '/')
 			ft_err();
-		i++;
-	}
 	ft_check(str);
-	a = ft_strtrim(str, " \n");
-	return (a);
+	ret = ft_strtrim(str, " \n");
+	return (ret);
 }

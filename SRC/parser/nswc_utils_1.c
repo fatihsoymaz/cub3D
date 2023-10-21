@@ -6,11 +6,11 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 00:43:50 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/21 12:57:00 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:39:27 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int	count_comma(char *s)
 {
@@ -71,14 +71,9 @@ void	control2(t_data *data, char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
-	{
-		if (ft_wh_sp(str[i]))
-			i++;
-		else
-			break ;
-	}
+	i = -1;
+	while (str[++i] == 32)
+		;
 	if (!ft_strncmp(str + i, "F", 1))
 		data->map.f = ft_ret_fc(str + i, 'F');
 	if (!ft_strncmp(str + i, "C", 1))

@@ -6,11 +6,11 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:59:29 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/20 17:28:56 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:39:29 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	ft_nosw_part2(char *str, t_data *game)
 {
@@ -28,7 +28,7 @@ void	ft_nosw_part2(char *str, t_data *game)
 	}
 }
 
-void	ft_check12(char *str)
+void	ft_check2(char *str)
 {
 	if ((str[0] == 'W' && str[1] != 'E') || (str[0] == 'E' && str[1] != 'A')
 		|| (str[0] == 'S' && str[1] != 'O') || (str[0] == 'N' && str[1] != 'O'))
@@ -39,7 +39,7 @@ void	ft_nosw(char *str, t_data *game)
 {
 	while (*str == 32)
 		str++;
-	ft_check12(str);
+	ft_check2(str);
 	if (!ft_strncmp(str, "NO", 2))
 	{
 		if (game->map.no)

@@ -6,11 +6,11 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 03:58:39 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/20 21:13:52 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:39:31 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	map_free(char **map)
 {
@@ -69,7 +69,7 @@ int	map_lines(char *str)
 
 int	ft_wh_sp(char c)
 {
-	if ((c <= 13 && c >= 9) || c == 32)
+	if (c == 32)
 		return (1);
 	return (0);
 }

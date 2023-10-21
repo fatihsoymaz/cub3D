@@ -6,12 +6,11 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:49:43 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/20 13:04:59 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:39:18 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
-
+#include "../../include/cub3d.h"
 
 void	path_basket(t_data *fc)
 {

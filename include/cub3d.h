@@ -47,4 +47,9 @@ char		*ft_strjoin_v2(char *str, char buffer, int len);
 int			map_lines(char *str);
 void		del_wspace(char **str);
 void		free_func(t_data *data);
+void		path_checker(char **str, t_data *data);
+char		**duplicate_to_map(t_data *data);
+void		ctrl(t_data *data);
+void		space_full(char **str);
+void		empty_line(char **str, int *k, t_data *data);
 #endif

@@ -1,6 +1,8 @@
 NAME = cub3D
-SRCS =  ./SRC/utils.c ./SRC/utils2.c ./SRC/ft_ret.c ./SRC/map.c ./SRC/main.c ./SRC/sn_utils.c \
-	./SRC/nswc_utils_1.c ./SRC/map_control.c ./include/get_next_line/libftgnl.a ./include/libft/libft.a
+SRCS =  ./SRC/parser/utils.c ./SRC/parser/map_dup_ctrl.c ./SRC/parser/utils2.c \
+		./SRC/parser/ft_ret.c ./SRC/parser/map.c ./SRC/parser/main.c ./SRC/parser/sn_utils.c \
+		./SRC/parser/nswc_utils_1.c ./SRC/parser/map_control.c \
+		./include/get_next_line/libftgnl.a ./include/libft/libft.a
 OBJS = $(SRCS:.c=.o)
 LIBFT = ./include/libft/libft.a
 GNL_SRCS = ./include/get_next_line/libftgnl.a

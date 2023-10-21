@@ -6,11 +6,11 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:34:44 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/21 12:57:31 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:49:46 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	ft_map2(int *i, t_data *game)
 {
@@ -19,7 +19,7 @@ void	ft_map2(int *i, t_data *game)
 	j = (*i);
 	while (game->map.map[*i])
 		(*i)++;
-	game->map.map2 = malloc(sizeof(char *) * (*i) - j + 1);
+	game->map.map2 = malloc(sizeof(char *) * (*i - j + 1));
 	(*i) = j + 1;
 	j = 0;
 	while (game->map.map[*i])
@@ -30,19 +30,6 @@ void	ft_map2(int *i, t_data *game)
 	}
 	game->map.map2[j] = 0;
 	game->map.map_row = j;
-}
-
-void	control(t_data *game, int *i, int *j)
-{
-	while (game->map.map[*i][*j])
-	{
-		if (!ft_strchr("WESNFC \n", game->map.map[*i][*j]))
-			ft_err();
-		else if (game->map.map[*i][*j] == 32)
-			(*j)++;
-		else
-			break ;
-	}
 }
 
 void	text_nswe(t_data *game)
@@ -56,7 +43,6 @@ void	text_nswe(t_data *game)
 		if (ft_sp_ctrl(game->map.map[i]) == 0)
 			ft_err();
 		j = 0;
-		control(game, &i, &j);
 		ft_nosw(game->map.map[i], game);
 		control2(game, game->map.map[i]);
 		free(game->map.map[i]);
@@ -96,7 +82,8 @@ int	main(int ac, char **av)
 		ft_get_map2(data);
 		free_func(data);
 	}
-	return (0);
+	else
+		ft_err();
 }
 
 //void	__attribute__((destructor)) after_main()
