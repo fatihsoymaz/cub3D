@@ -6,7 +6,7 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:49:43 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/21 16:39:18 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/12/01 15:07:54 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	path_basket(t_data *fc)
 
 void	path_check(t_data *fc)
 {
+	if (!fc->map.we || !fc->map.ea || !fc->map.no || !fc->map.so || !fc->map.c
+		|| !fc->map.f)
+		ft_err();
 	if (ft_strncmp(fc->map.we, "./", 2) || ft_strncmp(fc->map.so, "./", 2)
 		|| ft_strncmp(fc->map.ea, "./", 2) || ft_strncmp(fc->map.no, "./", 2))
 		ft_err();

@@ -6,7 +6,7 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:34:44 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/21 16:49:46 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/12/01 15:09:51 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	text_nswe(t_data *game)
 
 void	ft_get_map(char *str, t_data *game)
 {
-	int		fd;
-	int		i;
-	int		j;
+	int	fd;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = map_lines(str);
@@ -86,7 +86,7 @@ int	main(int ac, char **av)
 		ft_err();
 }
 
-//void	__attribute__((destructor)) after_main()
+// void	__attribute__((destructor)) after_main()
 //{
 //	pause();
 //}

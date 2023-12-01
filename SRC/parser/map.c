@@ -6,7 +6,7 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:39:47 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/10/21 16:39:24 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2023/12/01 15:09:55 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,13 @@ void	data_add_arg(t_data *data, int *i, int *j, int *k)
 	while (data->map.map2[*i])
 	{
 		if (ft_sp_ctrl(data->map.map2[*i]) == 0)
+		{
 			ft_err();
+		}
 		*j = -1;
 		while (data->map.map2[*i][++(*j)])
 		{
-			if (!ft_strchr("01\n NSWE", data->map.map2[*i][*j]))
+			if (!ft_strchr("01\nNSWE ", data->map.map2[*i][*j]))
 				ft_err();
 			else if (ft_strchr("NWES", data->map.map2[*i][*j]))
 			{
