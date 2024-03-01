@@ -92,6 +92,7 @@ void	ft_get_map2(t_data *data)
 	int	k;
 
 	i = 0;
+	j = 0;
 	while (ft_strlen(data->map.map2[i]) == 1)
 		i++;
 	empty_line(data->map.map2, &i, data);
