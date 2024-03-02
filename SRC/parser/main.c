@@ -67,7 +67,6 @@ void ft_get_map(char *str, t_data *game)
 	text_nswe(game);
 }
 
-
 void take_img_next(t_data *data)
 {
 	int size = 64;
@@ -87,11 +86,11 @@ void player_vals(t_data *data)
 void set_dir(t_player *player)
 {
 	if (player->dir == 'N')
-		player->dir_radian = 1.5 * M_PI;
+		player->dir_radian = M_PI * 3 / 2;
 	else if (player->dir == 'S')
-		player->dir_radian = 0.5 * M_PI;
+		player->dir_radian = M_PI / 2;
 	else if (player->dir == 'E')
-		player->dir_radian = 0;
+		player->dir_radian = 2 * M_PI;
 	else if (player->dir == 'W')
 		player->dir_radian = M_PI;
 }
@@ -106,7 +105,6 @@ void init_player(t_data *data)
 	data->player->pos_x += 0.5;
 	data->player->pos_y = data->map.p_row + 0.5;
 	data->player->dir_y = 0;
-	data->player->dir_radian = M_PI / 4;
 	set_dir(data->player);
 }
 int close_window(void)
@@ -143,35 +141,35 @@ int is_collide(double new_x, double new_y, t_data *data)
 
 void ft_move(t_player *player, int dir, t_data *data)
 {
-    double old_pos_x = player->pos_x;
-    double old_pos_y = player->pos_y;
+	double old_pos_x = player->pos_x;
+	double old_pos_y = player->pos_y;
 
-    if (dir == 'N')
-    {
-        player->pos_x += player->dir_x * MOVE_SPEED;
-        player->pos_y += player->dir_y * MOVE_SPEED;
-    }
-    else if (dir == 'S')
-    {
-        player->pos_x -= player->dir_x * MOVE_SPEED;
-        player->pos_y -= player->dir_y * MOVE_SPEED;
-    }
-    else if (dir == 'E')
-    {
-        player->pos_x -= player->dir_y * MOVE_SPEED;
-        player->pos_y += player->dir_x * MOVE_SPEED;
-    }
-    else if (dir == 'W')
-    {
-        player->pos_x += player->dir_y * MOVE_SPEED;
-        player->pos_y -= player->dir_x * MOVE_SPEED;
-    }
+	if (dir == 'N')
+	{
+		player->pos_x += player->dir_x * MOVE_SPEED;
+		player->pos_y += player->dir_y * MOVE_SPEED;
+	}
+	else if (dir == 'S')
+	{
+		player->pos_x -= player->dir_x * MOVE_SPEED;
+		player->pos_y -= player->dir_y * MOVE_SPEED;
+	}
+	else if (dir == 'E')
+	{
+		player->pos_x -= player->dir_y * MOVE_SPEED;
+		player->pos_y += player->dir_x * MOVE_SPEED;
+	}
+	else if (dir == 'W')
+	{
+		player->pos_x += player->dir_y * MOVE_SPEED;
+		player->pos_y -= player->dir_x * MOVE_SPEED;
+	}
 
-    if (is_collide(player->pos_x, player->pos_y, data))
-    {
-        player->pos_x = old_pos_x;
-        player->pos_y = old_pos_y;
-    }
+	if (is_collide(player->pos_x, player->pos_y, data))
+	{
+		player->pos_x = old_pos_x;
+		player->pos_y = old_pos_y;
+	}
 }
 
 void ft_turn(t_player *player, char dir)
@@ -243,7 +241,6 @@ void ray_step(t_ray *ray)
 	}
 }
 
-
 int is_boundary_violated(t_ray *ray, int map_size)
 {
 	if (ray->map_x < 0 || ray->map_y < 0)
@@ -271,7 +268,7 @@ void determine_texture(t_data *data, t_ray *ray)
 	}
 }
 
-int	is_hit(t_ray *ray, t_data *data)
+int is_hit(t_ray *ray, t_data *data)
 {
 	if (is_boundary_violated(ray, WIDTH))
 		return (1);
@@ -279,7 +276,6 @@ int	is_hit(t_ray *ray, t_data *data)
 		return (1);
 	return (0);
 }
-
 
 void calculate_perpetual(t_data *data, t_ray *ray)
 {
@@ -387,11 +383,11 @@ void draw_textured_line(t_data *data, t_ray *ray, int x, int line_height)
 	}
 }
 
-void	draw_floor_ceiling(t_data *data, int x, int lineHeight)
+void draw_floor_ceiling(t_data *data, int x, int lineHeight)
 {
-	int	start;
-	int	end;
-	int	y;
+	int start;
+	int end;
+	int y;
 
 	start = (WINDOW_HEIGHT - lineHeight) / 2;
 	end = (WINDOW_HEIGHT + lineHeight) / 2;
@@ -406,7 +402,6 @@ void	draw_floor_ceiling(t_data *data, int x, int lineHeight)
 	while (++y < WINDOW_HEIGHT)
 		my_mlx_pixel_put(data->img_data, x, y, data->floor_color);
 }
-
 
 void raycast(t_data *data)
 {
@@ -439,6 +434,8 @@ void routine(t_data *data)
 							data->img_data->img, 0, 0);
 }
 
+
+
 int render(t_data *data)
 {
 	data->player->dir_x = cos(data->player->dir_radian);
@@ -456,19 +453,20 @@ int render(t_data *data)
 	else if (data->key == RIGHT_ARROW)
 		ft_turn((data->player), RIGHT_ARROW);
 	routine(data);
+
 	return (0);
 }
 
-int	cub_mouse(int x, int y, t_data *data)
+int cub_mouse(int x, int y, t_data *data)
 {
-    (void)y; // y koordinatını kullanmıyoruz, bu yüzden hata önlemek için bu satırı ekledik.
-    
-    data->player->dir_radian += (x - data->mouse_x) / 100.0;
+	(void)y; // y koordinatını kullanmıyoruz, bu yüzden hata önlemek için bu satırı ekledik.
 
-    // Fare x koordinatını güncelle
-    data->mouse_x = x;
+	data->player->dir_radian += (x - data->mouse_x) / 100.0;
 
-    return (0);
+	// Fare x koordinatını güncelle
+	data->mouse_x = x;
+
+	return (0);
 }
 
 void init_hooks(t_data *data)
@@ -517,7 +515,7 @@ int main(int ac, char **av)
 		ft_err();
 }
 
-void __attribute__((destructor)) after_main()
-{
-	system("leaks cub3D");
-}
+// void __attribute__((destructor)) after_main()
+// {
+// 	system("leaks cub3D");
+// }

@@ -83,7 +83,6 @@ typedef struct s_map
 	char *ea;
 	int *c;
 	int *f;
-	int i; // silinecek değerleri görmek için yazıldı
 	double p_col;
 	double p_row;
 	char type;
@@ -111,7 +110,6 @@ typedef struct s_data
 	void *so_img;
 	void *ea_img;
 	void *we_img;
-	char rgb_flag;
 	int ceiling_color;
 	int floor_color;
 	struct s_img *img_data;
