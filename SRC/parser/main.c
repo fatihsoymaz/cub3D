@@ -463,7 +463,6 @@ int	cub_mouse(int x, int y, t_data *data)
 {
     (void)y; // y koordinatını kullanmıyoruz, bu yüzden hata önlemek için bu satırı ekledik.
     
-    // Fare hareketlerini kullanarak oyuncunun bakış açısını güncelle
     data->player->dir_radian += (x - data->mouse_x) / 100.0;
 
     // Fare x koordinatını güncelle
@@ -518,7 +517,7 @@ int main(int ac, char **av)
 		ft_err();
 }
 
-// void __attribute__((destructor)) after_main()
-// {
-// 	system("leaks cub3D");
-// }
+void __attribute__((destructor)) after_main()
+{
+	system("leaks cub3D");
+}
