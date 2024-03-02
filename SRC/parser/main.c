@@ -67,28 +67,6 @@ void ft_get_map(char *str, t_data *game)
 	text_nswe(game);
 }
 
-void denek(t_data *data)
-{
-	// printf("map_row = %d\n", data->map.map_row);
-	// printf("map_col = %d\n", data->map.map_col);
-	//  printf("no = %s\n", data->map.no);
-	//  printf("so = %s\n", data->map.so);
-	//  printf("we = %s\n", data->map.we);
-	//  printf("ea = %s\n", data->map.ea);
-	//  printf("f = %d\n", data->map.f[0]);
-	//  printf("f = %d\n", data->map.f[1]);
-	//   printf("f = %d\n", data->map.f[2]);
-	//  printf("c = %d\n", data->map.c[0]);
-	//  printf("c = %d\n", data->map.c[1]);
-	//  printf("c = %d\n", data->map.c[2]);
-	printf("type = %c\n", data->map.type);
-
-	// while (data->map.map2[data->map.i])
-	// {
-	// 	printf("%s", data->map.map2[data->map.i]);
-	// 	data->map.i++;
-	// }
-}
 
 void take_img_next(t_data *data)
 {
@@ -163,54 +141,37 @@ int is_collide(double new_x, double new_y, t_data *data)
 	return (0);
 }
 
-void ft_move2(t_player *player, int dir, t_data *data)
-{
-	if (dir == 'E')
-	{
-		player->pos_x -= player->dir_y * (MOVE_SPEED);
-		player->pos_y += player->dir_x * (MOVE_SPEED);
-		if (is_collide(player->pos_x, player->pos_y, data))
-		{
-			player->pos_x += player->dir_y * (MOVE_SPEED);
-			player->pos_y -= player->dir_x * (MOVE_SPEED);
-		}
-	}
-	else if (dir == 'W')
-	{
-		player->pos_x += player->dir_y * (MOVE_SPEED);
-		player->pos_y -= player->dir_x * (MOVE_SPEED);
-		if (is_collide(player->pos_x, player->pos_y, data))
-		{
-			player->pos_x -= player->dir_y * (MOVE_SPEED);
-			player->pos_y += player->dir_x * (MOVE_SPEED);
-		}
-	}
-}
-
 void ft_move(t_player *player, int dir, t_data *data)
 {
-	if (dir == 'N')
-	{
-		player->pos_x += player->dir_x * (MOVE_SPEED);
-		player->pos_y += player->dir_y * (MOVE_SPEED);
-		if (is_collide(player->pos_x, player->pos_y, data))
-		{
-			player->pos_x -= player->dir_x * (MOVE_SPEED);
-			player->pos_y -= player->dir_y * (MOVE_SPEED);
-		}
-	}
-	else if (dir == 'S')
-	{
-		player->pos_x -= player->dir_x * (MOVE_SPEED);
-		player->pos_y -= player->dir_y * (MOVE_SPEED);
-		if (is_collide(player->pos_x, player->pos_y, data))
-		{
-			player->pos_x += player->dir_x * (MOVE_SPEED);
-			player->pos_y += player->dir_y * (MOVE_SPEED);
-		}
-	}
-	else if (dir == 'E' || dir == 'W')
-		ft_move2(player, dir, data);
+    double old_pos_x = player->pos_x;
+    double old_pos_y = player->pos_y;
+
+    if (dir == 'N')
+    {
+        player->pos_x += player->dir_x * MOVE_SPEED;
+        player->pos_y += player->dir_y * MOVE_SPEED;
+    }
+    else if (dir == 'S')
+    {
+        player->pos_x -= player->dir_x * MOVE_SPEED;
+        player->pos_y -= player->dir_y * MOVE_SPEED;
+    }
+    else if (dir == 'E')
+    {
+        player->pos_x -= player->dir_y * MOVE_SPEED;
+        player->pos_y += player->dir_x * MOVE_SPEED;
+    }
+    else if (dir == 'W')
+    {
+        player->pos_x += player->dir_y * MOVE_SPEED;
+        player->pos_y -= player->dir_x * MOVE_SPEED;
+    }
+
+    if (is_collide(player->pos_x, player->pos_y, data))
+    {
+        player->pos_x = old_pos_x;
+        player->pos_y = old_pos_y;
+    }
 }
 
 void ft_turn(t_player *player, char dir)
