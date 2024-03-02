@@ -459,8 +459,22 @@ int render(t_data *data)
 	return (0);
 }
 
+int	cub_mouse(int x, int y, t_data *data)
+{
+    (void)y; // y koordinatını kullanmıyoruz, bu yüzden hata önlemek için bu satırı ekledik.
+    
+    // Fare hareketlerini kullanarak oyuncunun bakış açısını güncelle
+    data->player->dir_radian += (x - data->mouse_x) / 100.0;
+
+    // Fare x koordinatını güncelle
+    data->mouse_x = x;
+
+    return (0);
+}
+
 void init_hooks(t_data *data)
 {
+	mlx_hook(data->mlx_win, 06, 1L << 6, cub_mouse, data);
 	mlx_hook(data->mlx_win, 17, 0, close_window, NULL);
 	mlx_hook(data->mlx_win, 2, 0, ft_press, data);
 	mlx_hook(data->mlx_win, 3, 0, ft_release, data);

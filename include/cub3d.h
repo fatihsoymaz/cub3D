@@ -118,6 +118,7 @@ typedef struct s_data
 	t_img imgs[4];
 	struct s_player *player;
 	int key;
+	int mouse_x;
 
 } t_data;
 
