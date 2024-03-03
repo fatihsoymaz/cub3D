@@ -163,9 +163,9 @@ void ft_move(t_player *player, int dir, t_data *data)
     else if (dir == 'S')
         move(player, -player->dir_x, -player->dir_y, data);
     else if (dir == 'E')
-        move(player, player->dir_y, -player->dir_x, data);
-    else if (dir == 'W')
         move(player, -player->dir_y, player->dir_x, data);
+    else if (dir == 'W')
+        move(player, player->dir_y, -player->dir_x, data);
 }
 void ft_turn(t_player *player, char dir)
 {
@@ -194,30 +194,36 @@ void init_ray(t_data *data, t_ray *ray, double angle)
 	ray->hit = 0;
 }
 
+void calculate_step(t_ray *ray)
+{
+    if (ray->ray_dir.x < 0)
+        ray->step_x = -1;
+    else
+        ray->step_x = 1;
+
+    if (ray->ray_dir.y < 0)
+        ray->step_y = -1;
+    else
+        ray->step_y = 1;
+}
+
+void calculate_dist(t_data *data, t_ray *ray)
+{
+    if (ray->ray_dir.x < 0)
+        ray->side_dist.x = (data->player->pos_x - ray->map_x) * ray->delta_dist.x;
+    else
+        ray->side_dist.x = (ray->map_x + 1.0 - data->player->pos_x) * ray->delta_dist.x;
+
+    if (ray->ray_dir.y < 0)
+        ray->side_dist.y = (data->player->pos_y - ray->map_y) * ray->delta_dist.y;
+    else
+        ray->side_dist.y = (ray->map_y + 1.0 - data->player->pos_y) * ray->delta_dist.y;
+}
+
 void calculate_step_and_dist(t_data *data, t_ray *ray)
 {
-	if (ray->ray_dir.x < 0)
-	{
-		ray->step_x = -1;
-		ray->side_dist.x = (data->player->pos_x - ray->map_x) * ray->delta_dist.x;
-	}
-	else
-	{
-		ray->step_x = 1;
-		ray->side_dist.x = (ray->map_x + 1.0 - data->player->pos_x);
-		ray->side_dist.x *= ray->delta_dist.x;
-	}
-	if (ray->ray_dir.y < 0)
-	{
-		ray->step_y = -1;
-		ray->side_dist.y = (data->player->pos_y - ray->map_y) * ray->delta_dist.y;
-	}
-	else
-	{
-		ray->step_y = 1;
-		ray->side_dist.y = (ray->map_y + 1.0 - data->player->pos_y);
-		ray->side_dist.y *= ray->delta_dist.y;
-	}
+    calculate_step(ray);
+    calculate_dist(data, ray);
 }
 
 void ray_step(t_ray *ray)

@@ -10,6 +10,7 @@
 
 #define WIDTH 800
 #define HEIGHT 600
+#define SIZE 64
 # define BLOCK_SIZE 64
 # define ESC 53
 # define KEY_PRESS 2
