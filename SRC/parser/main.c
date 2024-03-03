@@ -139,39 +139,34 @@ int is_collide(double new_x, double new_y, t_data *data)
 	return (0);
 }
 
-void ft_move(t_player *player, int dir, t_data *data)
+void	move(t_player *player, double dx, double dy, t_data *data)
 {
-	double old_pos_x = player->pos_x;
-	double old_pos_y = player->pos_y;
+    double	old_pos_x;
+    double	old_pos_y;
 
-	if (dir == 'N')
-	{
-		player->pos_x += player->dir_x * MOVE_SPEED;
-		player->pos_y += player->dir_y * MOVE_SPEED;
-	}
-	else if (dir == 'S')
-	{
-		player->pos_x -= player->dir_x * MOVE_SPEED;
-		player->pos_y -= player->dir_y * MOVE_SPEED;
-	}
-	else if (dir == 'E')
-	{
-		player->pos_x -= player->dir_y * MOVE_SPEED;
-		player->pos_y += player->dir_x * MOVE_SPEED;
-	}
-	else if (dir == 'W')
-	{
-		player->pos_x += player->dir_y * MOVE_SPEED;
-		player->pos_y -= player->dir_x * MOVE_SPEED;
-	}
+    old_pos_x = player->pos_x;
+    old_pos_y = player->pos_y;
+    player->pos_x += dx * MOVE_SPEED;
+    player->pos_y += dy * MOVE_SPEED;
 
-	if (is_collide(player->pos_x, player->pos_y, data))
-	{
-		player->pos_x = old_pos_x;
-		player->pos_y = old_pos_y;
-	}
+    if (is_collide(player->pos_x, player->pos_y, data))
+    {
+        player->pos_x = old_pos_x;
+        player->pos_y = old_pos_y;
+    }
 }
 
+void ft_move(t_player *player, int dir, t_data *data)
+{
+    if (dir == 'N')
+        move(player, player->dir_x, player->dir_y, data);
+    else if (dir == 'S')
+        move(player, -player->dir_x, -player->dir_y, data);
+    else if (dir == 'E')
+        move(player, player->dir_y, -player->dir_x, data);
+    else if (dir == 'W')
+        move(player, -player->dir_y, player->dir_x, data);
+}
 void ft_turn(t_player *player, char dir)
 {
 	if (dir == LEFT_ARROW)
