@@ -6,7 +6,7 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:59:29 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/12/01 15:03:27 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2024/03/06 22:39:17 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,14 @@ void	ft_nosw(char *str, t_data *game)
 		game->map.so = ft_ret(str + 2);
 	}
 	ft_nosw_part2(str, game);
+}
+
+void	empty_line(char **str, int *k, t_data *data)
+{
+	int	i;
+
+	i = *k - 1;
+	while (str[++i] && i < data->map.map_row - 1)
+		if (str[i][0] == '\n' && (str[i + 1][0] == '1' || str[i + 1][0] == 32))
+			ft_err();
 }
