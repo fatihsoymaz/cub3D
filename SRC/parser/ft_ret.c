@@ -6,17 +6,29 @@
 /*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:04:09 by fsoymaz           #+#    #+#             */
-/*   Updated: 2023/12/01 15:01:05 by fsoymaz          ###   ########.fr       */
+/*   Updated: 2024/03/09 22:40:12 by fsoymaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-char	**ft_ret_fc_next(char *str, char **split, int res, char c)
+void	check_format(char *str)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
+	while (str[i])
+	{
+		if (str[i] == ',' && (str[i - 1] == ' ' || str[i + 1] == ' '))
+			ft_err();
+		i++;
+	}
+}
+
+char	**ft_ret_fc_next(char *str, char **split, char c)
+{
+	int	i;
+
 	i = 0;
 	while (ft_wh_sp(str[i]))
 		i++;
@@ -28,28 +40,19 @@ char	**ft_ret_fc_next(char *str, char **split, int res, char c)
 	}
 	else
 		ft_err();
-	res = count_wd(str + i);
-	if (res != 3)
-		ft_err();
+	check_format(str + i);
 	split = ft_split(str + i, ',');
 	return (split);
 }
 
 int	*ft_ret_fc(char *str, char c)
 {
-	int		comma;
 	char	**split;
-	int		res;
 	int		*a;
 
-	res = 0;
 	split = NULL;
 	a = malloc(sizeof(int) * 3);
-	comma = count_comma(str);
-	if (comma != 2)
-		ft_err();
-	else if (comma == 2)
-		split = ft_ret_fc_next(str, split, res, c);
+	split = ft_ret_fc_next(str, split, c);
 	a[0] = ft_atoi(split[0]);
 	a[1] = ft_atoi(split[1]);
 	a[2] = ft_atoi(split[2]);
@@ -57,16 +60,6 @@ int	*ft_ret_fc(char *str, char c)
 		ft_err();
 	map_free(split);
 	return (a);
-}
-
-void	ft_check(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == 'm' && str[i - 1] == 'p' && str[i - 2] == 'x')
-			break ;
 }
 
 char	*ft_ret(char *str)
@@ -78,7 +71,6 @@ char	*ft_ret(char *str)
 	while (str[++i])
 		if (str[i] == '.' && str[i - 1] != 32 && str[i + 1] == '/')
 			ft_err();
-	ft_check(str);
 	ret = ft_strtrim(str, " \n");
 	return (ret);
 }

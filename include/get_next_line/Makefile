@@ -15,7 +15,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-clean: clean
+clean:
 	$(RM) $(OBJS)
 
 fclean: clean

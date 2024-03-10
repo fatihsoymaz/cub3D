@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsoymaz <fsoymaz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: taybakan <taybakan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 22:40:30 by fsoymaz           #+#    #+#             */
-/*   Updated: 2024/03/06 22:40:31 by fsoymaz          ###   ########.fr       */
+/*   Created: 2024/03/09 16:22:58 by fsoymaz           #+#    #+#             */
+/*   Updated: 2024/03/10 00:12:48 by taybakan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,21 @@ void	w_rgb_to_map(t_data *data)
 
 void	wall_image(t_data *data)
 {
+	int	i;
+
+	i = -1;
 	data->img_data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->img_data->addr = mlx_get_data_addr(data->img_data->img,
 			&data->img_data->bpp, &data->img_data->line_length,
 			&data->img_data->endian);
-	data->imgs[0].img = data->ea_img;
-	data->imgs[1].img = data->no_img;
-	data->imgs[2].img = data->so_img;
-	data->imgs[3].img = data->we_img;
-	data->imgs[0].addr = mlx_get_data_addr(data->imgs[0].img,
-			&data->imgs[0].bpp, &data->imgs[0].line_length,
-			&data->imgs[0].endian);
-	data->imgs[1].addr = mlx_get_data_addr(data->imgs[1].img,
-			&data->imgs[1].bpp, &data->imgs[1].line_length,
-			&data->imgs[1].endian);
-	data->imgs[2].addr = mlx_get_data_addr(data->imgs[2].img,
-			&data->imgs[2].bpp, &data->imgs[2].line_length,
-			&data->imgs[2].endian);
-	data->imgs[3].addr = mlx_get_data_addr(data->imgs[3].img,
-			&data->imgs[3].bpp, &data->imgs[3].line_length,
-			&data->imgs[3].endian);
+	data->imgs[3].img = data->ea_img;
+	data->imgs[1].img = data->so_img;
+	data->imgs[2].img = data->no_img;
+	data->imgs[0].img = data->we_img;
+	while (++i < 4)
+	{
+		data->imgs[i].addr = mlx_get_data_addr(data->imgs[i].img,
+				&data->imgs[i].bpp, &data->imgs[i].line_length,
+				&data->imgs[i].endian);
+	}
 }

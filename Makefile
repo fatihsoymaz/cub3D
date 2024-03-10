@@ -3,7 +3,11 @@ NAME = cub3D
 SRCS =  ./SRC/parser/utils.c ./SRC/parser/map_dup_ctrl.c ./SRC/parser/utils2.c \
         ./SRC/parser/ft_ret.c ./SRC/parser/map.c ./SRC/parser/main.c ./SRC/parser/sn_utils.c \
         ./SRC/parser/nswc_utils_1.c ./SRC/parser/map_control.c \
-        ./SRC/parser/rgb_utils.c
+        ./SRC/parser/rgb_utils.c ./SRC/parser/map_operations.c \
+		./SRC/parser/player.c ./SRC/parser/rendering.c \
+		./SRC/parser/utils3.c ./SRC/parser/utils4.c \
+		./SRC/parser/utils5.c ./SRC/parser/utils6.c \
+		./SRC/parser/utils7.c
 
 GNL_SRCS = ./include/get_next_line/libftgnl.a
 LIBFT_SRC = ./include/libft/libft.a
@@ -13,7 +17,7 @@ GNL_OBJS = $(GNL_SRCS:.c=.o)
 LIBFT_OBJS = $(LIBFT_SRC:.c=.o)
 
 MLX = ./include/mlx/libmlx.a
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 LFLAGS = -framework OpenGL -framework AppKit -L./include/mlx -lmlx
 
 CC=gcc
@@ -38,6 +42,7 @@ clean:
 fclean: clean
 	@make clean -C ./include/get_next_line
 	@make clean -C ./include/libft
+	@make clean -C ./include/mlx
 	@rm -rf $(NAME)
 
 re: fclean all
